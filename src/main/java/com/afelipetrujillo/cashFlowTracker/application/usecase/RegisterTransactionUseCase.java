@@ -7,12 +7,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RegisterTransactionUseCase {
 
-    private TransactionRepository repository;
+    private final TransactionRepository repository;
 
     public Transaction execute(Transaction transaction) {
         transaction.initialize();
 
-        if(!transaction.isValid()) {
+        if (!transaction.isValid()) {
             throw new IllegalArgumentException("Invalid transaction data: check amount and description.");
         }
 

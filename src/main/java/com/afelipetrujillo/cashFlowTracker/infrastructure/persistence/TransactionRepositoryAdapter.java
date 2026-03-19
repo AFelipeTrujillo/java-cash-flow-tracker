@@ -3,6 +3,7 @@ package com.afelipetrujillo.cashFlowTracker.infrastructure.persistence;
 import com.afelipetrujillo.cashFlowTracker.domain.model.Transaction;
 import com.afelipetrujillo.cashFlowTracker.domain.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -36,6 +37,12 @@ public class TransactionRepositoryAdapter implements TransactionRepository {
     @Override
     public void deleteById(UUID id) {
         jpaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Transaction> findAllOrderByDateDesc() {
+        return jpaRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"))
+                .stream().map(this::toDomain).collect(Collectors.toList());
     }
 
     private TransactionEntity toEntity(Transaction domain) {

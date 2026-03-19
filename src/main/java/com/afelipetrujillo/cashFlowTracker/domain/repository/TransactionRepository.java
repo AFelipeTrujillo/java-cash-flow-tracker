@@ -20,4 +20,6 @@ public interface TransactionRepository {
 
     // Delete by id
     void deleteById(UUID id);
+
+    List<Transaction> findAllOrderByDateDesc();
 }

@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class TransactionConfig {
 
     @Bean
-    public RegisterTransactionUseCase registerTransactionUseCase(TransactionRepository repository) {
-        return new RegisterTransactionUseCase(repository);
+    public RegisterTransactionUseCase registerTransactionUseCase(TransactionRepository repository, GetBalanceUseCase getBalanceUseCase) {
+        return new RegisterTransactionUseCase(repository, getBalanceUseCase);
     }
 
     @Bean
